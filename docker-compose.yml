@@ -68,6 +68,8 @@ services:
       - TEMPORAL_NAMESPACE=default
       - TASK_QUEUE=hello-task-queue
     networks: [temporal-net]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     deploy:
       replicas: 1                                # scale later with --scale worker=N

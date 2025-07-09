@@ -3,7 +3,9 @@ import logging
 import os
 from temporalio import client, worker
 from workflows.workflows import HelloWorkflow
+from workflows.docker_workflows import LaunchContainerWorkflow
 from activities.activities import say_hello
+from activities.docker_activities import check_container_exists, launch_docker_container
 
 logging.basicConfig(level=logging.INFO)
 
@@ -18,8 +20,8 @@ async def main():
     async with worker.Worker(
         conn,
         task_queue=task_queue,
-        workflows=[HelloWorkflow],
-        activities=[say_hello],
+        workflows=[HelloWorkflow, LaunchContainerWorkflow],
+        activities=[say_hello, check_container_exists, launch_docker_container],
     ):
         logging.info("Worker is running and polling task queue...")
         await asyncio.Event().wait()  # Keeps the worker alive
