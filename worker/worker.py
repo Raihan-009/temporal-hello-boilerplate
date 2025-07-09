@@ -2,8 +2,8 @@ import asyncio
 import logging
 import os
 from temporalio import client, worker
-from app.workflows import HelloWorkflow
-from app.activities import say_hello
+from workflows.workflows import HelloWorkflow
+from activities.activities import say_hello
 
 # logging.basicConfig(level=logging.INFO)
 

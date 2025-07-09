@@ -1,16 +1,21 @@
-# === Stage 1: Build layer with dependencies ===
+# === Stage 1: Build worker image ===
 FROM python:3.12-slim
 
+# Set working directory
 WORKDIR /app
 
+# Install dependencies
 COPY worker/requirements.txt .
-
-# Install Python deps into a virtual environment-like folder
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source code
+# Copy only necessary project parts
 COPY worker/worker.py ./worker.py
-COPY app ./app
-COPY worker/.env /app/.env
 
+COPY activities ./activities
+COPY workflows ./workflows
+
+# Optional: install dotenv if you load .env in Python
+# RUN pip install python-dotenv
+
+# Run the worker
 CMD ["python", "-u", "worker.py"]
