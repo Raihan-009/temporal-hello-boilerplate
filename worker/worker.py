@@ -5,7 +5,7 @@ from temporalio import client, worker
 from workflows.workflows import HelloWorkflow
 from activities.activities import say_hello
 
-# logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
 async def main():
     

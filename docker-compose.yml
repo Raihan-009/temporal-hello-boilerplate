@@ -71,3 +71,18 @@ services:
     restart: unless-stopped
     deploy:
       replicas: 1                                # scale later with --scale worker=N
+
+  # ───────── Fast API (Python) ───────────────────
+  api:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    depends_on:
+      temporal:
+        condition: service_healthy
+    environment:
+      - TEMPORAL_SERVER_ADDRESS=temporal:7233
+    ports:
+      - "8000:8000"  # Expose FastAPI
+    networks: [temporal-net]
+    restart: unless-stopped
