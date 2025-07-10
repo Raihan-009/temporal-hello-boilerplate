@@ -40,3 +40,4 @@ class DestroyContainerWorkflow:
             schedule_to_close_timeout=timedelta(seconds=30),
         )
         workflow.logger.info("[Workflow] : %s container has destroyed successfully", container_name)
+        return result
