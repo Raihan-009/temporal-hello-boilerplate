@@ -66,8 +66,10 @@ services:
     environment:
       - TEMPORAL_SERVER_ADDRESS=temporal:7233
       - TEMPORAL_NAMESPACE=default
-      - TASK_QUEUE=hello-task-queue
+      - TASK_QUEUE=central-task-queue
     networks: [temporal-net]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     deploy:
       replicas: 1                                # scale later with --scale worker=N
