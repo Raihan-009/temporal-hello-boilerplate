@@ -2,9 +2,9 @@ import asyncio
 import logging
 import os
 from temporalio import client, worker
-from workflows.workflows import HelloWorkflow
+from workflows.hello_workflows import HelloWorkflow
 from workflows.docker_workflows import LaunchContainerWorkflow
-from activities.activities import say_hello
+from activities.hello_activities import say_hello
 from activities.docker_activities import check_container_exists, launch_docker_container
 
 logging.basicConfig(level=logging.INFO)

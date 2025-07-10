@@ -1,12 +1,11 @@
 from datetime import timedelta
 from temporalio import workflow
-from activities.activities import *         # import the activity module
+from activities.hello_activities import say_hello
 
 @workflow.defn
 class HelloWorkflow:
     @workflow.run
     async def run(self, name: str) -> str:
-        # execute the activity
         await workflow.execute_activity(
             say_hello,
             name,

@@ -6,7 +6,7 @@ class LaunchContainerWorkflow:
     @workflow.run
     async def run(self, container_name: str, image_name: str) -> str:
         exists = await workflow.execute_activity(
-            "check_container_exists",  # Use activity name as string
+            "check_container_exists",
             args=[container_name],
             schedule_to_close_timeout=timedelta(seconds=10),
         )
@@ -15,9 +15,9 @@ class LaunchContainerWorkflow:
             return f"Container with name '{container_name}' already exists."
 
         result = await workflow.execute_activity(
-            "launch_docker_container",  # Use activity name as string
+            "launch_docker_container",
             args=[container_name, image_name],
-            schedule_to_close_timeout=timedelta(seconds=15),
+            schedule_to_close_timeout=timedelta(seconds=60),
         )
         workflow.logger.info("Workflow finished for %s container", container_name)
         return result
